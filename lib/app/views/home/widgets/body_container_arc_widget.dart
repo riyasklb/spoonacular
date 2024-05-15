@@ -32,7 +32,7 @@ class BodyContainerArcWidget extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          color: Colors.blue,
+          color: Colors.orange,
           child: AppBar(
             systemOverlayStyle: const SystemUiOverlayStyle(
               statusBarColor: Colors.grey,
@@ -45,7 +45,7 @@ class BodyContainerArcWidget extends StatelessWidget {
             title: Text(
               titleText,
               style: TextStyle(
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
                 fontSize: 20,
                 color: Colors.white,
               ),

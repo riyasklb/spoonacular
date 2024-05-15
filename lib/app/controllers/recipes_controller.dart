@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
@@ -39,28 +38,7 @@ class RecipesController extends GetxController {
 
   final isRefreshAllowed = true.obs;
 
-  final cuisineTypes = Rx<List<CuisineData>>([
-    CuisineData(name: "American", isChecked: false),
-    CuisineData(name: "Mexican", isChecked: false),
-    CuisineData(name: "Thai", isChecked: false),
-    CuisineData(name: "Chinese", isChecked: false),
-    CuisineData(name: "Korean", isChecked: false),
-    CuisineData(name: "Mediterranean", isChecked: false),
-    CuisineData(name: "Italian", isChecked: false),
-    CuisineData(name: "Indian", isChecked: false),
-    CuisineData(name: "French", isChecked: false),
-    CuisineData(name: "Vietnamese", isChecked: false),
-    CuisineData(name: "Japanese", isChecked: false),
-    CuisineData(name: "Caribbean", isChecked: false),
-  ]);
-
   final dietaryPreference = Rx<List<SelectionData>>([
-    // SelectionData(
-    //     name: "Low carb",
-    //     paramName: 'No param',
-    //     activeIcon: Assets.images.filter.noCarbsActive.path,
-    //     inactiveIcon: Assets.images.filter.noCarbsInactive.path,
-    //     isSelected: false),
     SelectionData(
       name: "Vegan",
       paramName: 'Vegan',
@@ -76,61 +54,11 @@ class RecipesController extends GetxController {
       isSelected: false,
     ),
     SelectionData(
-      name: "Keto",
-      paramName: 'Ketogenic',
-      activeIcon: iconImage,
-      inactiveIcon: iconImage,
-      isSelected: false,
-    ),
-    SelectionData(
-      name: "Whole30",
-      paramName: 'Whole30',
-      activeIcon: iconImage,
-      inactiveIcon: iconImage,
-      isSelected: false,
-    ),
-    // SelectionData(
-    //     name: "Plant based",
-    //     activeIcon: Assets.images.filter.plantBasedActive.path,
-    //     inactiveIcon: Assets.images.filter.plantBasedInactive.path,
-    //     isSelected: false,
-    //     paramName: 'No param'),
-    // SelectionData(
-    //     name: "Row food",
-    //     activeIcon: Assets.images.filter.proteinActive.path,
-    //     inactiveIcon: Assets.images.filter.proteinInactive.path,
-    //     isSelected: false,
-    //     paramName: 'No param'),
-    SelectionData(
         name: "Gluten free",
         activeIcon: iconImage,
         inactiveIcon: iconImage,
         isSelected: false,
         paramName: 'Gluten Free'),
-    // SelectionData(
-    //     name: "Mediterranean",
-    //     activeIcon: Assets.images.filter.mediterraneanActive.path,
-    //     inactiveIcon: Assets.images.filter.mediterraneanInactive.path,
-    //     isSelected: false,
-    //     paramName: 'No param'),
-    // SelectionData(
-    //     name: "Dairy free",
-    //     activeIcon: Assets.images.filter.dairyActive.path,
-    //     inactiveIcon: Assets.images.filter.dairyInactive.path,
-    //     isSelected: false,
-    //     paramName: 'No param'),
-    SelectionData(
-        name: "Paleo",
-        activeIcon: iconImage,
-        inactiveIcon: iconImage,
-        isSelected: false,
-        paramName: 'Paleo'),
-    SelectionData(
-        name: "Pescatarian",
-        activeIcon: iconImage,
-        inactiveIcon: iconImage,
-        isSelected: false,
-        paramName: 'Pescetarian'),
   ]);
 
   final foodAllergies = Rx<List<SelectionData>>([
@@ -190,12 +118,6 @@ class RecipesController extends GetxController {
 
   @override
   void onInit() async {
-    // loadFilterData();
-    // fetchPantryIngredients(
-    //   init: true,
-    // );
-    // fetchLikedId();
-    // recipeScrollController.addListener(configureScrollController);
     fetchRecipes();
     super.onInit();
   }
@@ -322,11 +244,6 @@ class RecipesController extends GetxController {
   }
 
   void updateSelectedData() {
-    List<String> selectedCuisineData = cuisineTypes.value
-        .where((item) => item.isChecked)
-        .map((selectedItem) => selectedItem.name)
-        .toList();
-
     List<String> selectedDietData = dietaryPreference.value
         .where((item) => item.isSelected)
         .map((selectedItem) => selectedItem.paramName)
@@ -337,7 +254,6 @@ class RecipesController extends GetxController {
         .map((selectedItem) => selectedItem.paramName)
         .toList();
 
-    selectedCuisines.value = selectedCuisineData.join(', ');
     selectedDietPreference.value = selectedDietData.join(', ');
     selectedFoodAllergies.value = selectedAllergyData.join(', ');
 
@@ -349,16 +265,12 @@ class RecipesController extends GetxController {
   void saveFilterData() {
     final storage = GetStorage();
 
-    List<Map<String, dynamic>> cuisineDataMapList =
-        cuisineTypes.value.map((data) => data.toMap()).toList();
-
     List<Map<String, dynamic>> dietDataMapList =
         dietaryPreference.value.map((data) => data.toMap()).toList();
 
     List<Map<String, dynamic>> allergyDataMapList =
         foodAllergies.value.map((data) => data.toMap()).toList();
 
-    storage.write('cuisineFilterData', jsonEncode(cuisineDataMapList));
     storage.write('dietaryFilterData', jsonEncode(dietDataMapList));
     storage.write('allergyFilterData', jsonEncode(allergyDataMapList));
   }
@@ -366,20 +278,8 @@ class RecipesController extends GetxController {
   void loadFilterData() {
     final storage = GetStorage();
 
-    String? cuisineDataJson = storage.read<String>('cuisineFilterData');
     String? dietDataJson = storage.read<String>('dietaryFilterData');
     String? allergyDataJson = storage.read<String>('allergyFilterData');
-
-    if (cuisineDataJson != null) {
-      // Decode the JSON string into a list of maps
-      List<Map<String, dynamic>> cuisineDataMapList =
-          List<Map<String, dynamic>>.from(jsonDecode(cuisineDataJson));
-
-      // Convert the list of maps back to a list of CuisineData objects
-      cuisineTypes.value =
-          cuisineDataMapList.map((map) => CuisineData.fromMap(map)).toList();
-      cuisineTypes.refresh();
-    }
 
     if (dietDataJson != null) {
       List<Map<String, dynamic>> dietDataMapList =
@@ -404,12 +304,6 @@ class RecipesController extends GetxController {
   }
 
   void clearFilter() {
-    // final storage = GetStorage();
-
-    for (var data in cuisineTypes.value) {
-      data.isChecked = false;
-    }
-
     for (var data in dietaryPreference.value) {
       data.isSelected = false;
     }
@@ -422,7 +316,7 @@ class RecipesController extends GetxController {
     selectedDietPreference.value = "";
     selectedFoodAllergies.value = "";
 
-    cuisineTypes.refresh();
+    // cuisineTypes.refresh();
     dietaryPreference.refresh();
     foodAllergies.refresh();
 
@@ -433,7 +327,7 @@ class RecipesController extends GetxController {
   }
 
   bool isFilterSelected() {
-    if (cuisineTypes.value.any((data) => data.isChecked == true) ||
+    if (dietaryPreference.value.any((data) => data.isSelected == true) ||
         dietaryPreference.value.any((data) => data.isSelected == true) ||
         foodAllergies.value.any((data) => data.isSelected == true)) {
       return true;

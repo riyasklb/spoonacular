@@ -2,7 +2,6 @@
 //
 //     final getRecepeModel = getRecepeModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 GetRecepeModel getRecepeModelFromJson(String str) =>

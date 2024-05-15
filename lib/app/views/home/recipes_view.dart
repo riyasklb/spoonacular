@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -7,11 +5,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:spoonacular/app/constants/app_constant.dart';
-import 'package:spoonacular/app/constants/recipe_listing_widget.dart';
+import 'package:spoonacular/app/views/home/widgets/recipe_listing_widget.dart';
 import 'package:spoonacular/app/controllers/recipes_controller.dart';
-import 'package:spoonacular/app/model/fliter_recipe_view.dart';
-import 'package:spoonacular/app/views/home/body_container_arc_widget.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:spoonacular/app/views/home/fliter_recipe_view.dart';
+import 'package:spoonacular/app/views/home/widgets/body_container_arc_widget.dart';
 
 class RecipesView extends StatefulWidget {
   const RecipesView({super.key});
@@ -22,24 +19,6 @@ class RecipesView extends StatefulWidget {
 
 class _RecipesViewState extends State<RecipesView> {
   final controller = Get.find<RecipesController>();
-
-  // @override
-  // void initState() {
-  //   WidgetsBinding.instance.addPostFrameCallback(
-  //     (timeStamp) {
-  //       if (bottomNavController.isCallNeeded == true) {
-  //         log("Called when value is true...");
-  //         controller.fetchPantryIngredients(
-  //           init: true,
-  //         );
-  //         bottomNavController.setValue(false);
-  //       } else {
-  //         log("Called when value is false...");
-  //       }
-  //     },
-  //   );
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +34,7 @@ class _RecipesViewState extends State<RecipesView> {
           ),
           child: Padding(
             padding: EdgeInsets.only(
-              top: 50,
+              top: 86,
               bottom: 18,
               left: 15,
               right: 15,
@@ -140,7 +119,10 @@ class _RecipesViewState extends State<RecipesView> {
                           () => const FliterRecipeView(),
                         );
                       },
-                      child: Icon(Icons.abc)),
+                      child: Icon(
+                        Icons.filter_3_outlined,
+                        color: Colors.white,
+                      )),
                 ),
               ],
             ),

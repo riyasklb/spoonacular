@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:like_button/like_button.dart';
 import 'package:spoonacular/app/controllers/recipes_controller.dart';
 import 'package:spoonacular/app/model/recipe_model.dart';
@@ -104,9 +103,7 @@ Padding recipeListingWidget({
                           likeBuilder: (isLiked) {
                             return isLiked
                                 ? Icon(Icons.favorite,
-                                    size: 24,
-                                    color: const Color.fromARGB(
-                                        131, 158, 158, 158))
+                                    size: 24, color: Colors.red)
                                 : Icon(
                                     Icons.favorite,
                                     size: 24,
@@ -137,36 +134,14 @@ Padding recipeListingWidget({
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Image.asset(
-                                iconImage,
-                                height: 16,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "dfghj",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayMedium!
-                                    .copyWith(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                            ],
-                          ),
                           SizedBox(
                             width: 20,
                           ),
                           Row(
                             children: [
-                              Image.asset(
-                                iconImage,
-                                height: 16,
+                              Icon(
+                                Icons.timer,
+                                color: Colors.white,
                               ),
                               SizedBox(
                                 width: 10,
@@ -186,19 +161,6 @@ Padding recipeListingWidget({
                           ),
                         ],
                       ),
-                      // RatingBar.readOnly(
-                      //   size: 24,
-                      //   isHalfAllowed: false,
-                      //   alignment: Alignment.bottomRight,
-                      //   filledIcon: Icons.star,
-                      //   emptyIcon: Icons.star,
-                      //   halfFilledIcon: Icons.star_half_outlined,
-                      //   emptyColor: Colors.white,
-                      //   filledColor: AppColors.appRatingYellow,
-                      //   halfFilledColor: AppColors.appRatingYellow,
-                      //   initialRating: rating.toDouble(),
-                      //   maxRating: 5,
-                      // ),
                     ],
                   ),
                 ),

@@ -6,15 +6,12 @@ class SelectionButton extends StatelessWidget {
   const SelectionButton({
     super.key,
     required this.name,
-    required this.activeIcon,
-    required this.inactiveIcon,
     required this.isSelected,
     required this.onTap,
   });
 
   final String name;
-  final String activeIcon;
-  final String inactiveIcon;
+
   final bool isSelected;
   final void Function() onTap;
 
@@ -26,14 +23,14 @@ class SelectionButton extends StatelessWidget {
         height: Get.height,
         width: Get.width,
         decoration: BoxDecoration(
-          color: Colors.grey,
+          color: Colors.grey[200],
           borderRadius: BorderRadius.all(
             Radius.circular(
               15,
             ),
           ),
           border: Border.all(
-              color: isSelected == true ? Colors.black : Colors.grey,
+              color: isSelected == true ? Colors.orange : Colors.grey,
               width: 1.5),
         ),
         child: Padding(
@@ -43,10 +40,10 @@ class SelectionButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Flexible(
-                    child: isSelected == true
-                        ? Image.asset(activeIcon)
-                        : Image.asset(inactiveIcon)),
+                // Flexible(
+                //     child: isSelected == true
+                //         ? Image.asset(activeIcon)
+                //         : Image.asset(inactiveIcon)),
                 SizedBox(
                   height: 5,
                 ),
@@ -60,7 +57,7 @@ class SelectionButton extends StatelessWidget {
                               ? FontWeight.w700
                               : FontWeight.w500,
                           color:
-                              isSelected == true ? Colors.grey : Colors.black,
+                              isSelected == true ? Colors.orange : Colors.black,
                         )),
               ],
             ),

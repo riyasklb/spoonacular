@@ -32,12 +32,12 @@ class FilterExpansionTile extends StatelessWidget {
             trailing: Obx(() => widgetExpanded.value == false
                 ? Icon(
                     Icons.keyboard_arrow_down_sharp,
-                    color: Colors.yellow,
+                    color: Colors.orange,
                     size: 30,
                   )
                 : Icon(
                     Icons.keyboard_arrow_up_sharp,
-                    color: Colors.yellow,
+                    color: Colors.orange,
                     size: 30,
                   )),
             onExpansionChanged: (bool expanded) {
