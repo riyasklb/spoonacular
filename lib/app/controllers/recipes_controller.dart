@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:get_storage/get_storage.dart';
-import 'package:spoonacular/app/local/sqflite.dart';
+
 import 'package:spoonacular/app/model/filter_model.dart';
-import 'package:spoonacular/app/model/local_model.dart';
+
 import 'package:spoonacular/app/model/recipe_model.dart';
 
 enum LoadingStatus { loading, completed, error }
