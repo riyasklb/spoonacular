@@ -225,7 +225,7 @@ class _RecipesViewState extends State<RecipesView> {
                                       cookingTime: recipe.readyInMinutes,
                                       onTap: () {},
                                       score: recipe.spoonacularScore,
-                                      rating: 3,
+                                    
                                       isLiked: false,
                                       likeTap: (bool liked) async {
                                         print(!liked);

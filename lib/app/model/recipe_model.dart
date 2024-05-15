@@ -217,6 +217,8 @@ class RecipeData {
         originalId: json["originalId"],
       );
 
+  set isLiked(bool isLiked) {}
+
   Map<String, dynamic> toJson() => {
         "vegetarian": vegetarian,
         "vegan": vegan,

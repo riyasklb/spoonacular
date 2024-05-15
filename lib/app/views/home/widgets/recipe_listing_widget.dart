@@ -13,7 +13,6 @@ Padding recipeListingWidget({
   required String title,
   required int cookingTime,
   required double score,
-  required int rating,
   required bool isLiked,
   required void Function() onTap,
   required List<EdIngredient> recipeIngredients,

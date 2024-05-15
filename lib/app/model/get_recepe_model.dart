@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final getRecepeModel = getRecepeModelFromJson(jsonString);
-
 import 'dart:convert';
 
 GetRecepeModel getRecepeModelFromJson(String str) =>
